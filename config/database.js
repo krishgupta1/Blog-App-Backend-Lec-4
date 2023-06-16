@@ -2,17 +2,17 @@ const mongoose = require("mongoose");
 
 require("dotenv").config();
 
-const connectWithDB = () => {
+const connectWithDb = () => {
     mongoose.connect(process.env.DATABASE_URL,  {        
-        useNewParser : true,
+        useNewUrlParser : true,
         useUnifiedTopology : true
     })
     .then(console.log("DB Connected Successfully"))
     .catch((error) => {
-        console.log("DB facing Connection Isseue");
-        console.log(err),
+        console.log("DB facing Connection Issue");
+        console.log(error),
         process.exit(1);
     })
 }
 
-module.exports = connectWithDB;
+module.exports = connectWithDb;

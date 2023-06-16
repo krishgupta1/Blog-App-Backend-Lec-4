@@ -1,10 +1,23 @@
 const express = require("express");
 const app = express();
 
-app.listen(3000, () => {
-    console.log("App is Running Successfully");
+require("dotenv").config();
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+
+const blog = require("./routes/blog")
+// mount
+app.use("/api/v1",blog);
+
+const connectWithDb = require("./config/database"); 
+connectWithDb();
+
+// start the server
+app.listen(PORT, () => {
+    console.log(`App is Started at Port No. ${PORT}`);
 })
 
-app.get("/", (res, req) => {
-    res.send(`<h1>This is my HomePage Baby</h1>`)
+app.get("/", (req, res) => {
+    res.send('<h1>This is HOmePage baby.</h1>');
 })
