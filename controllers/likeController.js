@@ -33,7 +33,7 @@ exports.unlikePost = async (req, res) => {
         const{post, like} = req.body;
         // find and delete the like from collection
         const deleteLike = await Like.findOneAndDelete({post:post, _id:like});
-        const updatePost = await Post.findByIdAndDelete(post, {$pull: {likes: deletedLike._id}}, {new: true});
+        const updatePost = await Post.findByIdAndUpdate(post, {$pull: {likes: deletedLike._id}}, {new: true});
 
         res.json({
             post : updatedPost,
@@ -41,7 +41,7 @@ exports.unlikePost = async (req, res) => {
     }
     catch(error){
         return res.status(400).json({
-            error: "Error while Liking post",
+            error: "Error while Un liking post",
         });
     }
 }
